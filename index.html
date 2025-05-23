@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quelle tenue pour aujourd'hui ?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="container">
+  <h1>Quelle tenue pour aujourd'hui ?</h1>
+
+  <form id="form-ville">
+    <label for="ville">Ville :</label>
+    <input type="text" id="ville" name="ville" required placeholder="Paris" />
+    <button type="submit">Voir la météo</button>
+  </form>
+
+  <section id="meteo" aria-live="polite"></section>
+
+  <section id="forecast" class="previsions" aria-label="Prévisions météo"></section>
+
+  <section id="conseils" aria-live="polite"></section>
+</main>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
