@@ -50,10 +50,10 @@ function afficherConseils(current) {
     const temp = current.temp;
     let conseil = "";
 
-    if (temp < 5) conseil = "Porte un manteau chaud, bonnet et gants.";
-    else if (temp < 12) conseil = "Une veste légère ou un pull suffira.";
+    if (temp < 5) conseil = "Brr, c'est frisqué... Porter un manteau chaud, un bonnet et des gants.";
+    else if (temp < 12) conseil = "Une veste légère ou un pull suffira pour éviter d'attraper froid.";
     else if (temp < 20) conseil = "Un t-shirt avec une petite veste.";
-    else conseil = "T-shirt léger, lunettes de soleil, casquette !";
+    else conseil = "T-shirt léger, lunettes de soleil (surtout pour le style), casquette ! Penser aussi à la crême solaire, on ne sait jamais.";
 
     zoneConseils.textContent = `Conseil tenue : ${conseil}`;
 }
