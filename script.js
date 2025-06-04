@@ -73,7 +73,7 @@ function afficherConseils(current) {
     else if (temp < 20)
         conseil = "Un t-shirt avec une petite veste. Mi-saison, mi-style";
     else
-        conseil = "Oversize, lunettes de soleil, casquette. Time to shine (littéralement).;
+        conseil = "Oversize, lunettes de soleil, casquette. Time to shine (littéralement)";
 
     // Affichage du conseil dans le HTML
     zoneConseils.textContent = `Conseil tenue : ${conseil}`;
