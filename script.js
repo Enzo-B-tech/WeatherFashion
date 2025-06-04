@@ -45,7 +45,20 @@ function afficherMeteo(current) {
 
 // Fonction pour afficher les 5 prochaines prévisions météo
 function afficherPrevisions(forecast) {
+    zonePrevisions.innerHTML = ""; // Vider d'abord l'ancien contenu
 
+    forecast.slice(0, 5).forEach(pr => { // Les 5 premières prévisions
+        const item = document.createElement('div');
+        item.className = 'mini-forecast';
+
+        item.innerHTML = `
+            <p>${pr.date.split(' ')[1]}</p>  <!-- Heure (HH:MM) -->
+            <p>${pr.temp}°C</p>
+            <img src="https://openweathermap.org/img/wn/${pr.icon}.png" alt="${pr.condition}">
+        `;
+
+        zonePrevisions.appendChild(item);
+    });
 }
 
 // Fonction pour afficher les conseils vestimentaires selon la température
@@ -54,13 +67,13 @@ function afficherConseils(current) {
     let conseil = "";
 
     if (temp < 5)
-        conseil = "Brr, c'est frisqué... Porter un manteau chaud, un bonnet et des gants.";
+        conseil = "Grosse veste, bonnet, et gants obligatoires. C’est pas le temps pour un défilé.";
     else if (temp < 12)
-        conseil = "Une veste légère ou un pull suffira pour éviter d'attraper froid.";
+        conseil = "Veste légère ou un pull chaud. On veut pas finir sous 3 couches de couvertures.";
     else if (temp < 20)
-        conseil = "Un t-shirt avec une petite veste.";
+        conseil = "Un t-shirt avec une petite veste. Mi-saison, mi-style";
     else
-        conseil = "T-shirt léger, lunettes de soleil (surtout pour le style), casquette ! Penser aussi à la crème solaire, on ne sait jamais.";
+        conseil = "Oversize, lunettes de soleil, casquette. Time to shine (littéralement).;
 
     // Affichage du conseil dans le HTML
     zoneConseils.textContent = `Conseil tenue : ${conseil}`;

@@ -1,3 +1,7 @@
+:root {
+    --br: 8px;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: #eef2f3;
