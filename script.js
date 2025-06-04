@@ -1,59 +1,80 @@
+// Import de la fonction qui récupère la météo (de weather.js)
 import { getWeatherData } from './weather.js';
 
-const formulaire = document.getElementById('form-ville');
-const champVille = document.getElementById('ville');
-const zoneMeteo = document.getElementById('meteo');
-const zonePrevisions = document.getElementById('forecast');
-const zoneConseils = document.getElementById('conseils');
+// On récupère les éléments HTML dont on a besoin
+const formulaire = document.getElementById('form-ville');      // Le formulaire
+const champVille = document.getElementById('ville');           // Champ de saisie de la ville
+const zoneMeteo = document.getElementById('meteo');            // Zone où l'on affiche la météo actuelle
+const zonePrevisions = document.getElementById('forecast');    // Zone où l'on affiche les prévisions
+const zoneConseils = document.getElementById('conseils');      // Zone où l'on affiche les conseils vestimentaires
 
+// Soumission du formulaire
 formulaire.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const ville = champVille.value.trim();
-    if (!ville) return;
+    event.preventDefault(); // empêche le rechargement de la page
+
+    const ville = champVille.value.trim(); // on récupère la ville tapée, sans espaces
+    if (!ville) return; // si rien n'est tapé, on arrête là
 
     try {
+        // Demande des données météo pour la ville
         const donnees = await getWeatherData(ville);
-        console.log("Données météo récupérées :", donnees);
+        console.log("Données météo récupérées :", donnees); // (pour débug)
 
+    // Affichage : la météo actuelle, les prévisions et les conseils
         afficherMeteo(donnees.current);
         afficherPrevisions(donnees.forecast);
         afficherConseils(donnees.current);
     } catch (error) {
+        // En cas d’erreur
         zoneMeteo.textContent = "Impossible de récupérer la météo.";
         zonePrevisions.innerHTML = "";
         zoneConseils.textContent = "";
     }
 });
 
+// Fonction pour afficher la météo actuelle
 function afficherMeteo(current) {
     zoneMeteo.innerHTML = `
-    <p>Température actuelle : ${current.temp}°C</p>
-    <p>Conditions : ${current.condition} <img src="https://openweathermap.org/img/wn/${current.icon}@2x.png" alt="${current.condition}"></p>
-  `;
+        <p>Température actuelle : ${current.temp}°C</p>
+        <p>Conditions : ${current.condition} 
+           <img src="https://openweathermap.org/img/wn/${current.icon}@2x.png" 
+                alt="${current.condition}">
+        </p>
+    `;
 }
 
+// Fonction pour afficher les 5 prochaines prévisions météo
 function afficherPrevisions(forecast) {
-    zonePrevisions.innerHTML = "";
-    forecast.slice(0, 5).forEach(pr => {
+    zonePrevisions.innerHTML = ""; // on vide d'abord l'ancien contenu
+
+    forecast.slice(0, 5).forEach(pr => { // on prend les 5 premières prévisions
         const item = document.createElement('div');
         item.className = 'mini-forecast';
+
         item.innerHTML = `
-      <p>${pr.date.split(' ')[1]}</p>
-      <p>${pr.temp}°C</p>
-      <img src="https://openweathermap.org/img/wn/${pr.icon}.png" alt="${pr.condition}">
-    `;
-        zonePrevisions.appendChild(item);
+            <p>${pr.date.split(' ')[1]}</p>  <!-- Heure (HH:MM) -->
+            <p>${pr.temp}°C</p>
+            <img src="https://openweathermap.org/img/wn/${pr.icon}.png" alt="${pr.condition}">
+        `;
+
+        zonePrevisions.appendChild(item); // on ajoute au DOM
     });
 }
 
+// Fonction pour afficher les conseils vestimentaires selon la température
 function afficherConseils(current) {
     const temp = current.temp;
     let conseil = "";
 
-    if (temp < 5) conseil = "Brr, c'est frisqué... Porter un manteau chaud, un bonnet et des gants.";
-    else if (temp < 12) conseil = "Une veste légère ou un pull suffira pour éviter d'attraper froid.";
-    else if (temp < 20) conseil = "Un t-shirt avec une petite veste.";
-    else conseil = "T-shirt léger, lunettes de soleil (surtout pour le style), casquette ! Penser aussi à la crême solaire, on ne sait jamais.";
+    if (temp < 5)
+        conseil = "Brr, c'est frisqué... Porter un manteau chaud, un bonnet et des gants.";
+    else if (temp < 12)
+        conseil = "Une veste légère ou un pull suffira pour éviter d'attraper froid.";
+    else if (temp < 20)
+        conseil = "Un t-shirt avec une petite veste.";
+    else
+        conseil = "T-shirt léger, lunettes de soleil (surtout pour le style), casquette ! Penser aussi à la crème solaire, on ne sait jamais.";
 
+    // Affichage du conseil dans le HTML
     zoneConseils.textContent = `Conseil tenue : ${conseil}`;
 }
