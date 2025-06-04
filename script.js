@@ -45,9 +45,9 @@ function afficherMeteo(current) {
 
 // Fonction pour afficher les 5 prochaines prévisions météo
 function afficherPrevisions(forecast) {
-    zonePrevisions.innerHTML = ""; // on vide d'abord l'ancien contenu
+    zonePrevisions.innerHTML = ""; // Vider d'abord l'ancien contenu
 
-    forecast.slice(0, 5).forEach(pr => { // on prend les 5 premières prévisions
+    forecast.slice(0, 5).forEach(pr => { // 5 premières prévisions
         const item = document.createElement('div');
         item.className = 'mini-forecast';
 
@@ -57,7 +57,7 @@ function afficherPrevisions(forecast) {
             <img src="https://openweathermap.org/img/wn/${pr.icon}.png" alt="${pr.condition}">
         `;
 
-        zonePrevisions.appendChild(item); // on ajoute au DOM
+        zonePrevisions.appendChild(item);
     });
 }
 
