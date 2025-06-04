@@ -1,20 +1,7 @@
-:root {
-    --br: 8px; /* arrondi standard */
-    --br-small: 4px;
-    --font-main: Arial, sans-serif;
-    --bg-page: #eef2f3;
-    --bg-bloc: #fff;
-    --bg-forecast: #f0f0f0;
-    --text-color: #222;
-    --accent: #0077cc;
-    --accent-hover: #005fa3;
-    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 body {
-    font-family: var(--font-main);
-    background: var(--bg-page);
-    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    background: #eef2f3;
+    color: #222;
     margin: 0;
     padding: 1rem;
     display: flex;
@@ -24,10 +11,10 @@ body {
 .container {
     max-width: 600px;
     width: 100%;
-    background: var(--bg-bloc);
+    background: #fff;
     padding: 1.5rem;
-    border-radius: var(--br);
-    box-shadow: var(--box-shadow);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -49,15 +36,15 @@ input[type="text"] {
 button {
     padding: 0.6rem;
     font-size: 1rem;
-    background-color: var(--accent);
+    background-color: #0077cc;
     color: white;
     border: none;
-    border-radius: var(--br-small);
+    border-radius: 4px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--accent-hover);
+    background-color: #005fa3;
 }
 
 #meteo {
@@ -79,8 +66,8 @@ button:hover {
 }
 
 .mini-forecast {
-    background: var(--bg-forecast);
-    border-radius: var(--br-small);
+    background: #f0f0f0;
+    border-radius: 4px;
     padding: 0.5rem;
     text-align: center;
     flex: 1 1 80px;
