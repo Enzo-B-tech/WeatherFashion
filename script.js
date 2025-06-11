@@ -1,40 +1,37 @@
 // Import de la fonction qui récupère la météo (de weather.js)
 import { getWeatherData } from './weather.js';
 
-// On récupère les éléments HTML dont on a besoin
-const formulaire = document.getElementById('form-ville');      // Le formulaire
-const champVille = document.getElementById('ville');           // Champ de saisie de la ville
-const zoneMeteo = document.getElementById('meteo');            // Zone où l'on affiche la météo actuelle
-const zonePrevisions = document.getElementById('forecast');    // Zone où l'on affiche les prévisions
-const zoneConseils = document.getElementById('conseils');      // Zone où l'on affiche les conseils vestimentaires
+// On récupère les éléments HTML avec querySelector (plus moderne)
+const form = document.querySelector('#form-ville');       // Le formulaire
+const cityInput = document.querySelector('#ville');       // Champ de saisie
+const weatherZone = document.querySelector('#meteo');     // Affichage météo actuelle
+const forecastZone = document.querySelector('#forecast'); // Prévisions météo
+const adviceZone = document.querySelector('#conseils');   // Conseils vestimentaires
 
 // Soumission du formulaire
-formulaire.addEventListener('submit', async (event) => {
-    event.preventDefault(); // empêche le rechargement de la page
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    const ville = champVille.value.trim(); // on récupère la ville tapée, sans espaces
-    if (!ville) return; // si rien n'est tapé, on arrête là
+    const ville = cityInput.value.trim();
+    if (!ville) return;
 
     try {
-        // Demande des données météo pour la ville
-        const donnees = await getWeatherData(ville);
-        console.log("Données météo récupérées :", donnees); // (pour débug)
+        const data = await getWeatherData(ville);
+        console.log("Données météo récupérées :", data);
 
-    // Affichage : la météo actuelle, les prévisions et les conseils
-        afficherMeteo(donnees.current);
-        afficherPrevisions(donnees.forecast);
-        afficherConseils(donnees.current);
+        displayWeather(data.current);
+        displayForecast(data.forecast);
+        displayOutfitAd(data.current);
     } catch (error) {
-        // En cas d’erreur
-        zoneMeteo.textContent = "Impossible de récupérer la météo.";
-        zonePrevisions.innerHTML = "";
-        zoneConseils.textContent = "";
+        weatherZone.textContent = "Impossible de récupérer la météo.";
+        forecastZone.innerHTML = "";
+        adviceZone.textContent = "";
     }
 });
 
-// Fonction pour afficher la météo actuelle
-function afficherMeteo(current) {
-    zoneMeteo.innerHTML = `
+// Affichage de la météo actuelle
+function displayWeather(current) {
+    weatherZone.innerHTML = `
         <p>Température actuelle : ${current.temp}°C</p>
         <p>Conditions : ${current.condition} 
            <img src="https://openweathermap.org/img/wn/${current.icon}@2x.png" 
@@ -43,26 +40,26 @@ function afficherMeteo(current) {
     `;
 }
 
-// Fonction pour afficher les 5 prochaines prévisions météo
-function afficherPrevisions(forecast) {
-    zonePrevisions.innerHTML = ""; // Vider d'abord l'ancien contenu
+// Affichage des prévisions (5 prochaines heures)
+function displayForecast(forecast) {
+    forecastZone.innerHTML = "";
 
-    forecast.slice(0, 5).forEach(pr => { // Les 5 premières prévisions
+    forecast.slice(0, 5).forEach(pr => {
         const item = document.createElement('div');
         item.className = 'mini-forecast';
 
         item.innerHTML = `
-            <p>${pr.date.split(' ')[1]}</p>  <!-- Heure (HH:MM) -->
+            <p>${pr.date.split(' ')[1]}</p>
             <p>${pr.temp}°C</p>
             <img src="https://openweathermap.org/img/wn/${pr.icon}.png" alt="${pr.condition}">
         `;
 
-        zonePrevisions.appendChild(item);
+        forecastZone.appendChild(item);
     });
 }
 
-// Fonction pour afficher les conseils vestimentaires selon la température
-function afficherConseils(current) {
+// Affichage des conseils vestimentaires
+function displayOutfitAd(current) {
     const temp = current.temp;
     let conseil = "";
 
@@ -75,6 +72,5 @@ function afficherConseils(current) {
     else
         conseil = "Oversize, lunettes de soleil, casquette. Time to shine (littéralement)";
 
-    // Affichage du conseil dans le HTML
-    zoneConseils.textContent = `Conseil tenue : ${conseil}`;
+    adviceZone.textContent = `Conseil tenue : ${conseil}`;
 }
