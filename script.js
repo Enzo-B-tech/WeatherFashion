@@ -66,11 +66,11 @@ function displayOutfitAd(current) {
     if (temp < 5)
         conseil = "Grosse veste, bonnet, et gants obligatoires. C’est pas le temps pour un défilé.";
     else if (temp < 12)
-        conseil = "Veste légère ou un pull chaud. On veut pas finir sous 3 couches de couvertures.";
+        conseil = "Veste légère ou un pull chaud. Evitons de finir avec un thermomètre dans la bouche.";
     else if (temp < 20)
-        conseil = "Un t-shirt avec une petite veste. Mi-saison, mi-style";
+        conseil = "Un t-shirt avec une petite veste. Mi-saison, mi-style.";
     else
-        conseil = "Oversize, lunettes de soleil, casquette. Time to shine (littéralement)";
+        conseil = "Oversize, lunettes de soleil, casquette. Time to shine.";
 
     adviceZone.textContent = `Conseil tenue : ${conseil}`;
 }
