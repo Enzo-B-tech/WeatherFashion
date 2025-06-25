@@ -6,7 +6,7 @@ export async function getWeatherData(ville = 'Paris') {
     const urlCurrent  = `${BASE_URL}/weather?q=${encodeURIComponent(ville)}&units=metric&appid=${API_KEY}`;
     const urlForecast = `${BASE_URL}/forecast?q=${encodeURIComponent(ville)}&units=metric&appid=${API_KEY}`;
 
-    // Lancer les deux "fetch" en parallèle grâce à Promise.all()
+    // Lancer les deux fetch en parallèle : Promise.all()
     const [resCurrent, resForecast] = await Promise.all([
         fetch(urlCurrent),
         fetch(urlForecast),
