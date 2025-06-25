@@ -6,7 +6,7 @@ const form = document.querySelector('#form-ville');       // Le formulaire
 const cityInput = document.querySelector('#ville');       // Champ de saisie
 const weatherZone = document.querySelector('#meteo');     // Affichage météo actuelle
 const forecastZone = document.querySelector('#forecast'); // Prévisions météo
-const adviceZone = document.querySelector('#conseils');   // Conseils vestimentaires
+const adviceZone = document.querySelector('#advices');   // advices vestimentaires
 
 // Soumission du formulaire
 form.addEventListener('submit', async (event) => {
@@ -57,20 +57,20 @@ function displayForecast(forecast) {
         forecastZone.appendChild(item);
     });
 }
-
-// Affichage des conseils vestimentaires
+ 
+// Affichage des advices vestimentaires
 function displayOutfitAd(current) {
     const temp = current.temp;
-    let conseil = "";
+    let advice = "";
 
     if (temp < 5)
-        conseil = "Grosse veste, bonnet, et gants obligatoires. C’est pas le temps pour un défilé.";
+        advice = "Grosse veste, bonnet, et gants obligatoires. C’est pas le temps pour un défilé.";
     else if (temp < 12)
-        conseil = "Veste légère ou un pull chaud. Evitons de finir avec un thermomètre dans la bouche.";
+        advice = "Veste légère ou un pull chaud. Evitons de finir avec un thermomètre dans la bouche.";
     else if (temp < 20)
-        conseil = "Un t-shirt avec une petite veste. Mi-saison, mi-style.";
+        advice = "Un t-shirt avec une petite veste. Mi-saison, mi-style.";
     else
-        conseil = "Oversize, lunettes de soleil, casquette. Time to shine.";
+        advice = "Oversize, lunettes de soleil, casquette. Time to shine.";
 
-    adviceZone.textContent = `Conseil tenue : ${conseil}`;
+    adviceZone.textContent = `advice tenue : ${advice}`;979042
 }
