@@ -4,7 +4,7 @@ import { getWeatherData } from './weather.js';
 // On récupère les éléments HTML avec querySelector (plus moderne)
 const form = document.querySelector('#form-city');       // Le formulaire
 const cityInput = document.querySelector('#city');       // Champ de saisie
-const weatherZone = document.querySelector('#meteo');     // Affichage météo actuelle
+const weatherZone = document.querySelector('#weather');     // Affichage météo actuelle
 const forecastZone = document.querySelector('#forecast'); // Prévisions météo
 const adviceZone = document.querySelector('#advices');   // advices vestimentaires
 
@@ -57,7 +57,7 @@ function displayForecast(forecast) {
         forecastZone.appendChild(item);
     });
 }
- 
+
 // Affichage des advices vestimentaires
 function displayOutfitAd(current) {
     const temp = current.temp;

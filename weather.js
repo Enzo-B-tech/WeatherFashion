@@ -22,7 +22,6 @@ export async function getWeatherData(ville = 'Paris') {
         resCurrent.json(),
         resForecast.json(),
     ]);
-
     // Réponse de l'API affichées dans la console du nav (debug)
     console.log("Données brutes actuelles :", currentData);
     console.log("Données brutes prévisions :", forecastData);
